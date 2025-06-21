@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+int main() {
+    // Define all expenses and income
+    int emi = 60736;
+    int grocery = 10000;
+    int gas_bill = 868;
+    int mobile_bill = 291;
+    int school_fee = 5000;
+    int transport = 1500;
+    int milk = 900;
+    int trip = 50000;
+
+    int salary = 200000;
+    int savings = 25000;
+
+    // Calculate total expenses
+    int total_expenses = emi + grocery + gas_bill + mobile_bill + school_fee + transport + milk + trip;
+
+    // Calculate balance
+    int balance = salary - total_expenses - savings;
+
+    // Print the results
+    printf("------- Monthly Expense Summary -------\n");
+    printf("EMI: ₹%d\n", emi);
+    printf("Grocery: ₹%d\n", grocery);
+    printf("Gas Bill: ₹%d\n", gas_bill);
+    printf("Mobile Bill: ₹%d\n", mobile_bill);
+    printf("School Fee: ₹%d\n", school_fee);
+    printf("Transport: ₹%d\n", transport);
+    printf("Milk: ₹%d\n", milk);
+    printf("Trip: ₹%d\n", trip);
+    printf("Total Expenses: ₹%d\n", total_expenses);
+    printf("Monthly Salary: ₹%d\n", salary);
+    printf("Savings: ₹%d\n", savings);
+    printf("Remaining Balance: ₹%d\n", balance);
+
+    // Optional check to verify user-provided figures
+    if (total_expenses == 129295 && balance == 45705) {
+        printf("✅ Your data matches the provided summary.\n");
+    } else {
+        printf("⚠️  There seems to be a mismatch in your calculations.\n");
+    }
+
+    return 0;
+}
