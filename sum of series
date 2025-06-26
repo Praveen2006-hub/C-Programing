@@ -1,0 +1,13 @@
+#include<stdio.h>
+int main()
+{
+    int n=5,i=1;
+float sum=0.0;
+for(i=1;i<=n;i++)
+{
+    sum+=(1.0/i);
+}
+printf("sum=%2f",sum);
+return 0;
+}
+sum of series 
