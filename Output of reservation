@@ -1,0 +1,50 @@
+--- Hotel Reservation System ---
+1. Book a Room
+2. View Reservations
+3. View Room Status
+4. Exit
+Enter your choice: 1
+Enter guest name: John
+Enter guest age: 30
+Room 1 booked for John!
+
+--- Hotel Reservation System ---
+1. Book a Room
+2. View Reservations
+3. View Room Status
+4. Exit
+Enter your choice: 1
+Enter guest name: Alice
+Enter guest age: 25
+Room 2 booked for Alice!
+
+--- Hotel Reservation System ---
+1. Book a Room
+2. View Reservations
+3. View Room Status
+4. Exit
+Enter your choice: 2
+Reservations:
+Room 1: John (Age 30)
+Room 2: Alice (Age 25)
+
+--- Hotel Reservation System ---
+1. Book a Room
+2. View Reservations
+3. View Room Status
+4. Exit
+Enter your choice: 3
+Room Status:
+Room 1: Occupied
+Room 2: Occupied
+Room 3: Vacant
+Room 4: Vacant
+Room 5: Vacant
+
+--- Hotel Reservation System ---
+1. Book a Room
+2. View Reservations
+3. View Room Status
+4. Exit
+Enter your choice: 4
+Exiting system.
