@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Room {
+    int roomNumber;
+    int isOccupied;
+};
+
+struct Guest {
+    char name[50];
+    int age;
+};
+
+struct Reservation {
+    struct Guest guest;
+    int roomNumber;
+};
+
+int main() {
+    struct Room rooms[5];
+    struct Reservation reservations[5];
+    int reservationCount = 0;
+    int choice;
+    
+    // Initialize rooms
+    for (int i = 0; i < 5; i++) {
+        rooms[i].roomNumber = i + 1;
+        rooms[i].isOccupied = 0;
+    }
+
+    do {
+        printf("\n--- Hotel Reservation System ---\n");
+        printf("1. Book a Room\n");
+        printf("2. View Reservations\n");
+        printf("3. View Room Status\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1) {
+            if (reservationCount >= 5) {
+                printf("Sorry, all rooms are booked!\n");
+            } else {
+                struct Guest guest;
+                printf("Enter guest name: ");
+                scanf(" %[^\n]", guest.name);
+                printf("Enter guest age: ");
+                scanf("%d", &guest.age);
+
+                for (int i = 0; i < 5; i++) {
+                    if (rooms[i].isOccupied == 0) {
+                        rooms[i].isOccupied = 1;
+                        reservations[reservationCount].guest = guest;
+                        reservations[reservationCount].roomNumber = rooms[i].roomNumber;
+                        reservationCount++;
+                        printf("Room %d booked for %s!\n", rooms[i].roomNumber, guest.name);
+                        break;
+                    }
+                }
+            }
+        } else if (choice == 2) {
+            if (reservationCount == 0) {
+                printf("No reservations yet.\n");
+            } else {
+                printf("Reservations:\n");
+                for (int i = 0; i < reservationCount; i++) {
+                    printf("Room %d: %s (Age %d)\n", 
+                           reservations[i].roomNumber, 
+                           reservations[i].guest.name, 
+                           reservations[i].guest.age);
+                }
+            }
+        } else if (choice == 3) {
+            printf("Room Status:\n");
+            for (int i = 0; i < 5; i++) {
+                if (rooms[i].isOccupied)
+                    printf("Room %d: Occupied\n", rooms[i].roomNumber);
+                else
+                    printf("Room %d: Vacant\n", rooms[i].roomNumber);
+            }
+        } else if (choice == 4) {
+            printf("Exiting system.\n");
+        } else {
+            printf("Invalid choice.\n");
+        }
+    } while (choice != 4);
+
+    return 0;
+}
