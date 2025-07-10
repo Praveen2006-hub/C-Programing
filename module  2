@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <string.h>
+
+// Struct for Flight
+struct Flight {
+    char flightNo[10];
+    char destination[30];
+};
+
+// Struct for Passenger
+struct Passenger {
+    char name[50];
+    char seatNo[10];
+    struct Flight flight;
+};
+
+// Function to display menu
+void showMenu() {
+    printf("\n==== Boarding Pass and Travel Log Management ====\n");
+    printf("1. Book Flight and Generate Boarding Pass\n");
+    printf("2. View Travel Log\n");
+    printf("3. Exit\n");
+    printf("Enter your choice: ");
+}
+
+// Function to generate boarding pass and log to file
+void generateBoardingPass(struct Passenger p) {
+    printf("\n---- BOARDING PASS ----\n");
+    printf("Name        : %s\n", p.name);
+    printf("Flight No   : %s\n", p.flight.flightNo);
+    printf("Seat No     : %s\n", p.seatNo);
+    printf("Destination : %s\n", p.flight.destination);
+    printf("------------------------\n");
+
+    // Write to log file
+    FILE *fp = fopen("travel_log.txt", "a");
+    if (fp != NULL) {
+        fprintf(fp, "Name: %s | Flight: %s | Seat: %s | Destination: %s\n",
+                p.name, p.flight.flightNo, p.seatNo, p.flight.destination);
+        fclose(fp);
+    } else {
+        printf("Error: Unable to open log file.\n");
+    }
+}
+
+// Function to view travel log
+void viewTravelLog() {
+    char ch;
+    FILE *fp = fopen("travel_log.txt", "r");
+    if (fp != NULL) {
+        printf("\n---- Travel Log ----\n");
+        while ((ch = fgetc(fp)) != EOF)
+            putchar(ch);
+        fclose(fp);
+    } else {
+        printf("No logs available.\n");
+    }
+}
+
+// Main function
+int main() {
+    int choice;
+    struct Passenger p;
+
+    do {
+        showMenu();
+        scanf("%d", &choice);
+        getchar();  // clear newline
+
+        switch (choice) {
+            case 1:
+                printf("\nEnter Passenger Name: ");
+                fgets(p.name, sizeof(p.name), stdin);
+                p.name[strcspn(p.name, "\n")] = 0;
+
+                printf("Enter Flight Number: ");
+                fgets(p.flight.flightNo, sizeof(p.flight.flightNo), stdin);
+                p.flight.flightNo[strcspn(p.flight.flightNo, "\n")] = 0;
+
+                printf("Enter Seat Number: ");
+                fgets(p.seatNo, sizeof(p.seatNo), stdin);
+                p.seatNo[strcspn(p.seatNo, "\n")] = 0;
+
+                printf("Enter Destination: ");
+                fgets(p.flight.destination, sizeof(p.flight.destination), stdin);
+                p.flight.destination[strcspn(p.flight.destination, "\n")] = 0;
+
+                generateBoardingPass(p);
+                break;
+
+            case 2:
+                viewTravelLog();
+                break;
+
+            case 3:
+                printf("Exiting program...\n");
+                break;
+
+            default:
+                printf("Invalid choice. Try again.\n");
+        }
+
+    } while (choice != 3);
+
+    return 0;
+}
